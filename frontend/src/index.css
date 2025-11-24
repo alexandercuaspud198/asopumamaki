@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide Emergent badge */
+#emergent-badge {
+  display: none !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 158 100% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 158 100% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 158 100% 14%;
+    --primary: 74 100% 44%;
+    --primary-foreground: 158 100% 14%;
+    --secondary: 194 100% 42%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 158 100% 96%;
+    --muted-foreground: 158 20% 45%;
+    --accent: 166 76% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 142 76% 85%;
+    --input: 142 76% 85%;
+    --ring: 74 100% 44%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 158 100% 14%;
+    --foreground: 0 0% 98%;
+    --card: 158 100% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 158 100% 14%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 74 100% 44%;
+    --primary-foreground: 158 100% 14%;
+    --secondary: 194 100% 42%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 158 100% 20%;
+    --muted-foreground: 158 20% 65%;
+    --accent: 166 76% 46%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 158 100% 20%;
+    --input: 158 100% 20%;
+    --ring: 74 100% 44%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
