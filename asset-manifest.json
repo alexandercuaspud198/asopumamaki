@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/asopumamaki/static/css/main.a57388b8.css",
+    "main.js": "/asopumamaki/static/js/main.deb7959f.js",
+    "index.html": "/asopumamaki/index.html",
+    "main.a57388b8.css.map": "/asopumamaki/static/css/main.a57388b8.css.map",
+    "main.deb7959f.js.map": "/asopumamaki/static/js/main.deb7959f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a57388b8.css",
+    "static/js/main.deb7959f.js"
+  ]
+}
