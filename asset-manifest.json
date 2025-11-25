@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/asopumamaki/static/css/main.a57388b8.css",
-    "main.js": "/asopumamaki/static/js/main.33ab20aa.js",
+    "main.js": "/asopumamaki/static/js/main.f29ce408.js",
     "index.html": "/asopumamaki/index.html",
     "main.a57388b8.css.map": "/asopumamaki/static/css/main.a57388b8.css.map",
-    "main.33ab20aa.js.map": "/asopumamaki/static/js/main.33ab20aa.js.map"
+    "main.f29ce408.js.map": "/asopumamaki/static/js/main.f29ce408.js.map"
   },
   "entrypoints": [
     "static/css/main.a57388b8.css",
-    "static/js/main.33ab20aa.js"
+    "static/js/main.f29ce408.js"
   ]
 }
