@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import ProductCatalog from '../components/ProductCatalog';
+import Gallery from '../components/Gallery';
 import { Button } from '../components/ui/button';
 import { Leaf, Droplets, Trees, Sprout, Heart, Users, Target, Eye, BookOpen, Mountain, Bug, Wheat, Phone, Mail, MapPin, Facebook, ChevronDown, Youtube } from 'lucide-react';
 
@@ -353,23 +354,8 @@ const Home = () => {
       </section>
 
       {/* Galería */}
-      <section id="galeria" className="section-padding bg-subtle">
-        <div className="container-custom">
-          <h2 className="section-title fade-in">Galería</h2>
-          <p className="text-center text-body-medium text-text-secondary mb-12 fade-in">Momentos de nuestro trabajo en el páramo</p>
-          <div className="gallery-grid">
-            {galleryImages.map((image, index) => (
-              <div key={index} className="gallery-item fade-in hover-scale">
-                <img
-                  src={image.url}
-                  alt={image.alt}
-                  className="gallery-image"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      <section id="galeria">
+        <Gallery />
       </section>
 
       {/* Contacto y YouTube */}
