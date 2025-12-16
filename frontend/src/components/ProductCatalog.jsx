@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "./ui/dialog";
 
 const products = [
     {
@@ -82,13 +87,28 @@ const ProductCatalog = () => {
                             key={product.id}
                             className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group animate-fade-in"
                         >
-                            <div className="relative overflow-hidden h-64">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
+                            <div className="relative overflow-hidden h-64 cursor-pointer">
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <div className="w-full h-full">
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
+                                        </div>
+                                    </DialogTrigger>
+                                    <DialogContent className="max-w-3xl border-none bg-transparent shadow-none p-0">
+                                        <div className="relative w-full h-full flex items-center justify-center">
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                                            />
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                             <div className="p-6">
                                 <div className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-2">
