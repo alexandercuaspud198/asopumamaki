@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
+    DialogTitle,
+    DialogDescription,
 } from "./ui/dialog";
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 
 const products = [
     {
@@ -54,10 +57,46 @@ const categories = ['Todos', 'Tubérculos', 'Hortalizas', 'Frutas', 'Procesados'
 
 const ProductCatalog = () => {
     const [activeCategory, setActiveCategory] = useState('Todos');
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const filteredProducts = activeCategory === 'Todos'
         ? products
         : products.filter(product => product.category === activeCategory);
+
+    const handleOpen = (product) => {
+        setSelectedProduct(product);
+    };
+
+    const handleClose = () => {
+        setSelectedProduct(null);
+    };
+
+    const handleNext = useCallback(() => {
+        if (!selectedProduct) return;
+        const currentIndex = filteredProducts.findIndex(p => p.id === selectedProduct.id);
+        const nextIndex = (currentIndex + 1) % filteredProducts.length;
+        setSelectedProduct(filteredProducts[nextIndex]);
+    }, [selectedProduct, filteredProducts]);
+
+    const handlePrev = useCallback(() => {
+        if (!selectedProduct) return;
+        const currentIndex = filteredProducts.findIndex(p => p.id === selectedProduct.id);
+        const prevIndex = (currentIndex - 1 + filteredProducts.length) % filteredProducts.length;
+        setSelectedProduct(filteredProducts[prevIndex]);
+    }, [selectedProduct, filteredProducts]);
+
+    // Keyboard navigation
+    useEffect(() => {
+        if (!selectedProduct) return;
+
+        const handleKeyDown = (e) => {
+            if (e.key === 'ArrowRight') handleNext();
+            if (e.key === 'ArrowLeft') handlePrev();
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedProduct, handleNext, handlePrev]);
 
     return (
         <section className="py-12 px-4 md:px-8 bg-gray-50">
@@ -87,28 +126,18 @@ const ProductCatalog = () => {
                             key={product.id}
                             className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group animate-fade-in"
                         >
-                            <div className="relative overflow-hidden h-64 cursor-pointer">
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <div className="w-full h-full">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
-                                        </div>
-                                    </DialogTrigger>
-                                    <DialogContent className="max-w-3xl border-none bg-transparent shadow-none p-0">
-                                        <div className="relative w-full h-full flex items-center justify-center">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
-                                            />
-                                        </div>
-                                    </DialogContent>
-                                </Dialog>
+                            <div
+                                className="relative overflow-hidden h-64 cursor-pointer"
+                                onClick={() => handleOpen(product)}
+                            >
+                                <div className="w-full h-full">
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
+                                </div>
                             </div>
                             <div className="p-6">
                                 <div className="text-xs font-semibold text-green-600 uppercase tracking-wider mb-2">
@@ -116,7 +145,10 @@ const ProductCatalog = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">{product.name}</h3>
                                 <p className="text-lg font-medium text-gray-600">{product.price}</p>
-                                <button className="mt-4 w-full py-2 bg-gray-100 text-gray-800 font-semibold rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300">
+                                <button
+                                    onClick={() => handleOpen(product)}
+                                    className="mt-4 w-full py-2 bg-gray-100 text-gray-800 font-semibold rounded-lg hover:bg-green-600 hover:text-white transition-colors duration-300"
+                                >
                                     Ver Detalles
                                 </button>
                             </div>
@@ -127,6 +159,59 @@ const ProductCatalog = () => {
                 {filteredProducts.length === 0 && (
                     <p className="text-center text-gray-500 mt-8">No hay productos en esta categoría.</p>
                 )}
+
+                {/* Lightbox Modal */}
+                <Dialog open={!!selectedProduct} onOpenChange={(open) => !open && handleClose()}>
+                    <DialogContent className="max-w-4xl w-full border-none bg-transparent shadow-none p-0 overflow-hidden">
+                        <VisuallyHidden.Root>
+                            <DialogTitle>Detalle de {selectedProduct?.name}</DialogTitle>
+                            <DialogDescription>
+                                Vista ampliada del producto {selectedProduct?.name} con precio {selectedProduct?.price}
+                            </DialogDescription>
+                        </VisuallyHidden.Root>
+
+                        <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
+                            {/* Image Container */}
+                            <div className="relative pointer-events-auto">
+                                <button
+                                    onClick={handleClose}
+                                    className="absolute -top-10 right-0 text-white hover:text-gray-300 bg-black/20 hover:bg-black/40 rounded-full p-2 transition-colors z-50 backdrop-blur-sm"
+                                    aria-label="Cerrar"
+                                >
+                                    <X size={24} />
+                                </button>
+
+                                {selectedProduct && (
+                                    <img
+                                        src={selectedProduct.image}
+                                        alt={selectedProduct.name}
+                                        className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                                    />
+                                )}
+
+                                {/* Navigation Buttons */}
+                                {filteredProducts.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100 sm:opacity-100"
+                                            aria-label="Imagen anterior"
+                                        >
+                                            <ChevronLeft size={32} />
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100 sm:opacity-100"
+                                            aria-label="Siguiente imagen"
+                                        >
+                                            <ChevronRight size={32} />
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
 
             <style jsx>{`
