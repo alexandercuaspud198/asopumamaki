@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
+import ProductCatalog from '../components/ProductCatalog';
 import { Button } from '../components/ui/button';
 import { Leaf, Droplets, Trees, Sprout, Heart, Users, Target, Eye, BookOpen, Mountain, Bug, Wheat, Phone, Mail, MapPin, Facebook, ChevronDown, Youtube } from 'lucide-react';
 
@@ -77,34 +78,36 @@ const Home = () => {
   ];
 
   const galleryImages = [
-    { url: 'https://images.unsplash.com/photo-1729865638468-bae23d8de8a1', alt: 'Paisaje del páramo' },
-    { url: 'https://images.unsplash.com/photo-1727514851322-82de7818e379', alt: 'Comunidad indígena' },
-    { url: 'https://images.unsplash.com/photo-1758390282329-0d93cf35d4ad', alt: 'Agricultura sostenible' },
-    { url: 'https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg', alt: 'Siembra de árboles' },
-    { url: 'https://images.unsplash.com/photo-1590334280735-e8121293dbf6', alt: 'Apicultura' },
-    { url: 'https://images.unsplash.com/photo-1590334280249-a8f0c9f46a1b', alt: 'Trabajo con abejas' },
-    { url: 'https://images.pexels.com/photos/9324330/pexels-photo-9324330.jpeg', alt: 'Restauración ambiental' },
-    { url: 'https://images.pexels.com/photos/2260933/pexels-photo-2260933.jpeg', alt: 'Colmenas' }
+    { url: `${process.env.PUBLIC_URL}/images/paramo.JPG`, alt: 'Paisaje del páramo' },
+    { url: `${process.env.PUBLIC_URL}/images/indigena.jpg`, alt: 'Comunidad indígena' },
+    { url: `${process.env.PUBLIC_URL}/images/asociacion.jpg`, alt: 'Asociación' },
+    { url: `${process.env.PUBLIC_URL}/images/siembra.jpg`, alt: 'Siembra de árboles' },
+    { url: `${process.env.PUBLIC_URL}/images/apicultura.jpg`, alt: 'Apicultura' },
+    { url: `${process.env.PUBLIC_URL}/images/restauracion1.jpg`, alt: 'Restauración ambiental' },
+    { url: `${process.env.PUBLIC_URL}/images/restauracion.jpg`, alt: 'Restauración ambiental' },
+    { url: `${process.env.PUBLIC_URL}/images/restauracion2.jpg`, alt: 'Restauración ambiental' }
   ];
+
 
   return (
     <div className="min-h-screen bg-page">
       {/* Header/Navbar */}
       <header className="network-header">
+
         <div className="nav-wrapper">
           <div className="flex items-center gap-3">
-            <img 
-              src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png" 
-              alt="Logo Pumamaki" 
+            <img
+              src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png"
+              alt="Logo Pumamaki"
               className="h-12 w-auto"
             />
             <span className="network-logo">Pumamaki</span>
           </div>
           <nav className="network-nav">
             <button onClick={() => scrollToSection('inicio')} className="network-nav-link">Inicio</button>
-            
+
             <div className="nav-dropdown">
-              <button 
+              <button
                 onClick={() => toggleMenu('nosotros')}
                 className="network-nav-link flex items-center gap-1"
               >
@@ -119,7 +122,7 @@ const Home = () => {
             </div>
 
             <div className="nav-dropdown">
-              <button 
+              <button
                 onClick={() => toggleMenu('trabajo')}
                 className="network-nav-link flex items-center gap-1"
               >
@@ -135,6 +138,7 @@ const Home = () => {
             </div>
 
             <button onClick={() => scrollToSection('proyectos')} className="network-nav-link">Proyectos</button>
+            <button onClick={() => scrollToSection('productos')} className="network-nav-link">Productos</button>
             <button onClick={() => scrollToSection('galeria')} className="network-nav-link">Galería</button>
             <button onClick={() => scrollToSection('contacto')} className="network-nav-link">Contacto</button>
           </nav>
@@ -148,8 +152,8 @@ const Home = () => {
           <h1 className="hero-title fade-in">Protegiendo el páramo, fortaleciendo la vida</h1>
           <p className="hero-subtitle fade-in">Asociación indígena agroecológica "Pumamaki"</p>
           <p className="hero-tagline fade-in">Reviviendo el verde de nuestros campos</p>
-          <Button 
-            onClick={() => scrollToSection('nosotros')} 
+          <Button
+            onClick={() => scrollToSection('nosotros')}
             className="btn-primary fade-in"
           >
             Conoce Nuestro Trabajo
@@ -232,7 +236,8 @@ const Home = () => {
                 </div>
                 <h3 className="card-title">Misión</h3>
                 <p className="card-description">
-                  Recuperar y conservar los ecosistemas de páramo y alta montaña mediante prácticas agroecológicas ancestrales y restauración ambiental, fortaleciendo la identidad cultural y el bienestar de nuestra comunidad indígena.
+                  La Asociación Indígena Agroecológica Reviviendo El Verde De Nuestros Campos “Pumamaki” es una organización del resguardo de Muellamués que trabaja en la conservación y propagación de árboles nativos para la restauración y protección ecológica de los ecosistemas alto andinos, con el fin de proteger el agua, aire, suelo y la biodiversidad en armonía y en equilibrio con la naturaleza.
+
                 </p>
               </CardContent>
             </Card>
@@ -246,7 +251,8 @@ const Home = () => {
                 </div>
                 <h3 className="card-title">Visión</h3>
                 <p className="card-description">
-                  Ser referente en conservación de ecosistemas de páramo y prácticas agroecológicas sostenibles, contribuyendo a la mitigación del cambio climático y al desarrollo integral de nuestras comunidades.
+                  En el 2030 la Asociación Indígena Agroecológica Reviviendo El Verde De Nuestros Campos “Pumamaki” será líder en el municipio de Guachucal en la investigación y propagación de diferentes especies nativas aptas para la restauración ecológica de los ecosistemas, basados en los estándares de calidad que permitan ampliar los canales de distribución y por ende contribuir en la recuperación de la biodiversidad, y la promoción de una cultura ambiental para preservar, mantener y prolongar la vida de la Madre Tierra.
+
                 </p>
               </CardContent>
             </Card>
@@ -285,8 +291,8 @@ const Home = () => {
           <h2 className="section-title fade-in">Nuestras Líneas de Trabajo</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {workLines.map((line, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className={`network-card fade-in hover-lift ${line.isMain ? 'card-highlight' : ''}`}
               >
                 <CardContent className="p-8">
@@ -339,6 +345,13 @@ const Home = () => {
         </div>
       </section>
 
+
+
+      {/* Product Catalog */}
+      <section id="productos" className="section-padding bg-gray-50">
+        <ProductCatalog />
+      </section>
+
       {/* Galería */}
       <section id="galeria" className="section-padding bg-subtle">
         <div className="container-custom">
@@ -347,8 +360,8 @@ const Home = () => {
           <div className="gallery-grid">
             {galleryImages.map((image, index) => (
               <div key={index} className="gallery-item fade-in hover-scale">
-                <img 
-                  src={image.url} 
+                <img
+                  src={image.url}
                   alt={image.alt}
                   className="gallery-image"
                   loading="lazy"
@@ -411,7 +424,7 @@ const Home = () => {
                     title="Ubicación Asociación Pumamaki"
                   ></iframe>
                 </div>
-                <a 
+                <a
                   href="https://www.google.com/maps/place/Asociaci%C3%B3n+Pumamaki/@0.927985,-77.7853317,877m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e295d4610a787eb:0xef0807ea0e018803!8m2!3d0.9279796!4d-77.7827568!16s%2Fg%2F11ln_gt6ss?hl=es&entry=ttu"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -425,27 +438,27 @@ const Home = () => {
               <div className="mt-8">
                 <h4 className="text-xl font-semibold text-text-primary mb-4">Síguenos en Redes Sociales</h4>
                 <div className="flex gap-4">
-                  <a 
-                    href="https://www.facebook.com/share/1AJ47C7zdL/" 
-                    target="_blank" 
+                  <a
+                    href="https://www.facebook.com/share/1AJ47C7zdL/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-button"
                     aria-label="Facebook"
                   >
                     <Facebook className="w-6 h-6" />
                   </a>
-                  <a 
-                    href="https://www.tiktok.com/@asociacion.pumamaki?is_from_webapp=1&sender_device=pc" 
-                    target="_blank" 
+                  <a
+                    href="https://www.tiktok.com/@asociacion.pumamaki?is_from_webapp=1&sender_device=pc"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-button"
                     aria-label="TikTok"
                   >
                     <BookOpen className="w-6 h-6" />
                   </a>
-                  <a 
-                    href="https://youtube.com/@asociacionpumamaki1024" 
-                    target="_blank" 
+                  <a
+                    href="https://youtube.com/@asociacionpumamaki1024"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="social-button"
                     aria-label="YouTube"
@@ -493,9 +506,9 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  <a 
-                    href="https://youtube.com/@asociacionpumamaki1024" 
-                    target="_blank" 
+                  <a
+                    href="https://youtube.com/@asociacionpumamaki1024"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary w-full mt-6 inline-flex items-center justify-center gap-2"
                   >
@@ -515,9 +528,9 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img 
-                  src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png" 
-                  alt="Logo Pumamaki" 
+                <img
+                  src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png"
+                  alt="Logo Pumamaki"
                   className="h-10 w-auto"
                 />
                 <span className="text-xl font-semibold text-text-primary">Pumamaki</span>
@@ -544,7 +557,7 @@ const Home = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </div >
   );
 };
 
