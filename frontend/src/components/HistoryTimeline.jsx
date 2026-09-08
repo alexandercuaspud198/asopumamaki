@@ -18,17 +18,30 @@ export default function HistoryTimeline() {
       <ol className="history-timeline-list">
         {timeline.events.map((event, index) => (
           <li key={event.id} className="history-timeline-event">
-            <div className="history-timeline-date">
-              <span>{event.year}</span>
-              {timeline.provisional && <small>Fecha de ejemplo</small>}
-            </div>
-            <div className="history-timeline-story">
-              <span className="history-timeline-step" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-            </div>
+            <article className="history-timeline-card" aria-labelledby={`timeline-${event.id}`}>
+              <div className="history-timeline-date">
+                <span>{event.year}</span>
+                {timeline.provisional && <small>Fecha de ejemplo</small>}
+              </div>
+              <figure className="history-timeline-photo">
+                <img
+                  src={`${process.env.PUBLIC_URL}/${event.image}`}
+                  alt={event.imageAlt}
+                  width="1600"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                />
+                {timeline.provisional && <figcaption>Fotografía de referencia del archivo de Pumamaki</figcaption>}
+              </figure>
+              <div className="history-timeline-story">
+                <span className="history-timeline-step" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 id={`timeline-${event.id}`}>{event.title}</h3>
+                <p>{event.description}</p>
+              </div>
+            </article>
           </li>
         ))}
       </ol>

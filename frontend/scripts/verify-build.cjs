@@ -28,10 +28,15 @@ const home = fs.readFileSync(path.resolve(__dirname, "../src/pages/GalleryPage.j
 const images = [...home.matchAll(/\$\{process\.env\.PUBLIC_URL\}\/([^`]+)`/g)];
 assert.ok(images.length > 0, "No se encontraron las imágenes locales de la página");
 for (const [, image] of images) verifyAsset(`${base}${image}`);
+const timeline = require('../src/data/historyTimeline.json');
+for (const event of timeline.events) {
+  assert.ok(event.image && event.imageAlt, `Falta la foto o su descripción: ${event.id}`);
+  verifyAsset(`${base}${event.image}`);
+}
 assert.ok(html.includes('lang="es"'), "Falta el idioma español del documento");
 for (const route of require('../src/siteRoutes.json')) {
   const entry = path.join(build, route.path, 'index.html');
   assert.equal(fs.readFileSync(entry, 'utf8'), html, `Entrada incorrecta para ${route.path}`);
 }
 assert.equal(fs.readFileSync(path.join(build, '404.html'), 'utf8'), html);
-console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados y ${images.length} referencias a imágenes locales.`);
+console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${images.length} fotos de galería y ${timeline.events.length} fotos en la línea del tiempo.`);
