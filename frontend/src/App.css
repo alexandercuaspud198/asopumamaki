@@ -70,13 +70,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 69, 52, 0.2);
 }
 
-.network-logo {
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  text-decoration: none;
-}
-
 .network-nav {
   display: flex;
   align-items: center;

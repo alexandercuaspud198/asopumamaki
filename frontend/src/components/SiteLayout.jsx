@@ -30,7 +30,6 @@ export default function SiteLayout() {
               alt="Logo Pumamaki"
               className="h-12 w-auto"
             />
-            <span className="network-logo">Pumamaki</span>
           </div>
           <nav className="network-nav">
             <NavLink end to="/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Inicio</NavLink>
