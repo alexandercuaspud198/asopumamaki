@@ -1,4 +1,5 @@
 import { Card, CardContent } from '../components/ui/card';
+import HistoryTimeline from '../components/HistoryTimeline';
 
 export default function History() {
 
@@ -6,8 +7,11 @@ export default function History() {
 <section id="historia" className="section-padding bg-subtle">
         <div className="container-custom">
           <h1 className="section-title fade-in">Nuestra Historia</h1>
+          <HistoryTimeline />
           <div className="max-w-4xl mx-auto">
-            <Card className="network-card fade-in">
+            <details className="history-full-story">
+              <summary>Leer el relato completo de nuestra historia</summary>
+            <Card className="network-card">
               <CardContent className="p-8 md:p-12">
                 <div className="space-y-6 text-body-medium text-text-secondary leading-relaxed">
                   <p>
@@ -49,6 +53,7 @@ export default function History() {
                 </div>
               </CardContent>
             </Card>
+            </details>
           </div>
         </div>
       </section>

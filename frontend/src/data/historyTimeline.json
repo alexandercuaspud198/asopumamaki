@@ -1,0 +1,42 @@
+{
+  "provisional": true,
+  "notice": "Las fechas son ejemplos para organizar esta línea del tiempo. Se reemplazarán por fechas verificadas de la asociación.",
+  "events": [
+    {
+      "id": "origen",
+      "year": "2010",
+      "title": "Nuestras raíces: un grupo de shagreros",
+      "description": "Familias del Resguardo de Muellamues se reúnen para compartir conocimientos tradicionales, conservar semillas propias y cuidar el territorio."
+    },
+    {
+      "id": "formacion-sena",
+      "year": "2011",
+      "title": "Aprender para cuidar la tierra",
+      "description": "El Programa Jóvenes Emprendedores Rurales del SENA acompaña el aprendizaje sobre abonos orgánicos, recuperación de semillas nativas, conservación de especies y prácticas sostenibles."
+    },
+    {
+      "id": "primer-vivero",
+      "year": "2012",
+      "title": "El primer vivero comunitario",
+      "description": "Don Humberto Revelo, primer presidente de Pumamaki, presta un lote de su vivienda. Allí comienzan el reconocimiento de plantas propias, la elaboración de abonos y la propagación de especies."
+    },
+    {
+      "id": "espacio-propio",
+      "year": "2016",
+      "title": "La búsqueda de un espacio propio",
+      "description": "Después de aproximadamente seis años de trabajo, la asociación busca un espacio propio para fortalecer sus procesos comunitarios, ambientales y productivos."
+    },
+    {
+      "id": "impulso-verde",
+      "year": "2017",
+      "title": "Sembrar junto a las comunidades",
+      "description": "El convenio con Impulso Verde financia un proceso de siembra de aproximadamente 6.000 árboles anuales. Las comunidades reciben los árboles y asumen el compromiso de sembrarlos y cuidarlos."
+    },
+    {
+      "id": "saberes",
+      "year": "2024",
+      "title": "Un legado que sigue creciendo",
+      "description": "Con una mayoría de mujeres indígenas, Pumamaki fortalece la economía familiar y la transmisión de conocimientos ancestrales entre las familias del resguardo."
+    }
+  ]
+}

@@ -64,3 +64,7 @@ Los plugins de [plugins](plugins/) para edición visual y comprobación de salud
 - Confirmar el contenido del catálogo y sustituir «Fotografía pendiente» por fotografías aprobadas. Los precios y productos actuales son referencias.
 - El logo de Emergent y la imagen principal de Unsplash siguen siendo externos; la galería utiliza las ocho fotografías locales.
 - Incorporar pruebas de comportamiento al añadir funcionalidades. El verificador de build comprueba archivos y rutas, pero no sustituye pruebas de interacción ni una comprobación del sitio publicado.
+
+## Editar la línea del tiempo
+
+Los hitos de Historia se editan en `src/data/historyTimeline.json`: `year`, `title` y `description`. Las fechas actuales son ilustrativas y están marcadas como tales tanto en el aviso general como en cada hito. Mantener `provisional: true` hasta verificar todas las fechas; después puede cambiarse a `false`. El diseño está en `src/components/HistoryTimeline.jsx` y `HistoryTimeline.css`. El relato institucional original sigue disponible bajo «Leer el relato completo de nuestra historia».
