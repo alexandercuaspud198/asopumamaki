@@ -57,6 +57,6 @@ Si `main` está protegida, crear una rama `codex/github-pages` antes del commit,
 
 ## Continuidad del proyecto
 
-La historia institucional está en [Home.jsx](frontend/src/pages/Home.jsx), junto con la navegación por secciones. La galería usa fotografías del repositorio. El catálogo contiene datos de referencia: confirmar productos, precios y disponibilidad; sus fotografías siguen pendientes. El logo de Emergent y la imagen principal de Unsplash aún dependen de servicios externos.
+La portada está en [Home.jsx](frontend/src/pages/Home.jsx) y la historia institucional en [History.jsx](frontend/src/pages/History.jsx). Las secciones tienen páginas independientes en `frontend/src/pages/`, con navegación compartida en `SiteLayout.jsx`. La galería usa fotografías del repositorio. El catálogo contiene datos de referencia: confirmar productos, precios y disponibilidad; sus fotografías siguen pendientes. El logo de Emergent y la imagen principal de Unsplash aún dependen de servicios externos.
 
 Queda pendiente modernizar las dependencias antiguas de CRA y resolver la compatibilidad del calendario antes de utilizarlo. La [guía técnica](frontend/README.md) documenta el estado de seguridad, las rutas y las verificaciones disponibles.

@@ -102,7 +102,7 @@ const ProductCatalog = () => {
     return (
         <section className="py-12 px-4 md:px-8 bg-gray-50">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">Nuestros Productos</h2>
+                <h1 className="text-3xl font-bold text-center mb-4 text-gray-800">Nuestros Productos</h1>
                 <p className="mx-auto mb-8 max-w-2xl text-center text-gray-600">
                     Catálogo de referencia. Los productos, precios y disponibilidad requieren confirmación con la asociación.
                 </p>

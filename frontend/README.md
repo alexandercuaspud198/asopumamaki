@@ -1,6 +1,6 @@
 # Frontend de Pumamaki
 
-Aplicación institucional estática de una sola página. La historia y secciones principales se editan en [src/pages/Home.jsx](src/pages/Home.jsx); la galería y el catálogo están en [src/components](src/components/).
+Sitio institucional con páginas independientes. Inicio solo muestra la portada. Cada sección tiene su componente en `src/pages/` y su dirección propia; `src/components/SiteLayout.jsx` comparte el menú y el pie de página.
 
 ## Tecnología e instalación
 
@@ -21,7 +21,7 @@ npm ci
 | Comando | Función |
 | --- | --- |
 | `npm start` | Servidor de desarrollo de CRACO. |
-| `npm run build` | Compilación optimizada en `build/`. |
+| `npm run build` | Compilación optimizada en `build/` y generación automática de entradas HTML por ruta. |
 | `npm run verify:build` | Comprueba subruta, bundles, estilos, manifiesto, imágenes locales y atributo de idioma. |
 | `npm run preview` | Sirve el build en `http://127.0.0.1:4173/asopumamaki/`. |
 | `npm test` | Inicia el runner de CRA mediante CRACO; todavía no hay una suite de pruebas del frontend. |
@@ -43,11 +43,11 @@ La validación local del **7 de septiembre de 2026** completó `npm install`, `n
 
 ## Rutas y recursos
 
-`homepage` ya estaba configurado como `https://alexandercuaspud198.github.io/asopumamaki`, y [src/App.js](src/App.js) ya utilizaba `BrowserRouter` con `basename="/asopumamaki"`. Se conservan ambos valores. Solo existe la ruta React `/`; los botones de navegación desplazan la página a secciones, sin crear rutas adicionales.
+`homepage` ya estaba configurado como `https://alexandercuaspud198.github.io/asopumamaki`, y [src/App.js](src/App.js) ya utilizaba `BrowserRouter` con `basename="/asopumamaki"`. Se conservan ambos valores. Las rutas se declaran en `src/siteRoutes.json`: Inicio, Historia, Misión y Visión, Nuestro Trabajo, Agroecología, Apicultura, Restauración, Proyectos, Productos, Galería y Contacto. Los enlaces cambian de página y el contenido anterior se desmonta.
 
 Las imágenes de [public/images](public/images/) usan `${process.env.PUBLIC_URL}/images/...` en JSX. Respetar las mayúsculas exactas de los nombres, como `paramo.JPG`, y evitar referencias absolutas como `/images/foto.jpg`, que omiten `/asopumamaki/`. Los imports de código y estilos se resuelven durante el build; no deben incluir la subruta del sitio.
 
-No se añadió un `404.html` de redirección. Si se incorporan rutas como `/historia`, `basename` por sí solo no permitirá recargarlas directamente en GitHub Pages: deberá definirse y comprobarse una estrategia de enrutamiento compatible antes de publicarlas. Consultar la [documentación de despliegue de CRA](https://create-react-app.dev/docs/deployment/#notes-on-client-side-routing).
+El script `postbuild` genera un `index.html` por cada ruta de `src/siteRoutes.json`. Así GitHub Pages puede servir enlaces directos y recargas con HTTP 200. También genera `404.html` para mostrar una página de error con enlace al Inicio cuando la ruta no existe. Al añadir una página, registrar su componente en App.js y su ruta en siteRoutes.json; `verify:build` comprueba sus entradas HTML.
 
 ## CI/CD
 

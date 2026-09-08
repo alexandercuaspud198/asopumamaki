@@ -1,0 +1,60 @@
+[
+  {
+    "path": "/",
+    "page": "Home",
+    "title": "Inicio"
+  },
+  {
+    "path": "/historia/",
+    "page": "History",
+    "title": "Historia"
+  },
+  {
+    "path": "/nosotros/",
+    "page": "About",
+    "title": "Misión y Visión"
+  },
+  {
+    "path": "/trabajo/",
+    "page": "Work",
+    "title": "Nuestro Trabajo"
+  },
+  {
+    "path": "/agroecologia/",
+    "page": "Work",
+    "title": "Agroecología",
+    "category": "Agroecología"
+  },
+  {
+    "path": "/apicultura/",
+    "page": "Work",
+    "title": "Apicultura",
+    "category": "Apicultura"
+  },
+  {
+    "path": "/restauracion/",
+    "page": "Work",
+    "title": "Restauración Ambiental",
+    "category": "Restauración Ambiental"
+  },
+  {
+    "path": "/proyectos/",
+    "page": "Projects",
+    "title": "Proyectos"
+  },
+  {
+    "path": "/productos/",
+    "page": "Products",
+    "title": "Productos"
+  },
+  {
+    "path": "/galeria/",
+    "page": "GalleryPage",
+    "title": "Galería"
+  },
+  {
+    "path": "/contacto/",
+    "page": "Contact",
+    "title": "Contacto"
+  }
+]

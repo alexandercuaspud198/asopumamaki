@@ -58,6 +58,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "node scripts/create-page-entries.cjs",
     "test": "craco test",
     "verify:build": "node scripts/verify-build.cjs",
     "preview": "node scripts/preview.cjs"

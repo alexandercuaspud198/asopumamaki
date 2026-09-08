@@ -557,3 +557,11 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* Shared navigation and independent pages. */
+.site-main { min-height: 70vh; outline: none; }
+.inner-page { padding-top: 140px; }
+.network-nav-link, .dropdown-item, .footer-link { text-decoration: none; }
+.network-nav-link[aria-current="page"], .dropdown-item[aria-current="page"] { background: rgba(255,255,255,.16); font-weight: 700; }
+.dropdown-item { display: block; }
+@media (max-width: 768px) { .inner-page { padding-top: 230px; } }
+@media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }

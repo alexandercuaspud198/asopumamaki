@@ -35,10 +35,19 @@ http.createServer((req, res) => {
     res.writeHead(302, { Location: `${base}/` }).end();
     return;
   }
-  const file = path.resolve(build, pathname.slice(base.length + 1) || "index.html");
+  let file = path.resolve(build, pathname.slice(base.length + 1) || "index.html");
+  if (pathname.startsWith(`${base}/`) && file.startsWith(`${build}${path.sep}`) &&
+      fs.existsSync(file) && fs.statSync(file).isDirectory()) {
+    if (!pathname.endsWith('/')) {
+      res.writeHead(301, { Location: `${pathname}/` }).end();
+      return;
+    }
+    file = path.join(file, 'index.html');
+  }
   if (!pathname.startsWith(`${base}/`) || !file.startsWith(`${build}${path.sep}`) ||
       !fs.existsSync(file) || !fs.statSync(file).isFile()) {
-    res.writeHead(404).end("Página no encontrada");
+    res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+    fs.createReadStream(path.join(build, '404.html')).pipe(res);
     return;
   }
   res.writeHead(200, { "Content-Type": types[path.extname(file).toLowerCase()] || "application/octet-stream" });
