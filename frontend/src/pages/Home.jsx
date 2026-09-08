@@ -3,7 +3,7 @@ import { Card, CardContent } from '../components/ui/card';
 import ProductCatalog from '../components/ProductCatalog';
 import Gallery from '../components/Gallery';
 import { Button } from '../components/ui/button';
-import { Leaf, Droplets, Trees, Sprout, Heart, Users, Target, Eye, BookOpen, Mountain, Bug, Wheat, Phone, Mail, MapPin, Facebook, ChevronDown, Youtube } from 'lucide-react';
+import { Leaf, Trees, Sprout, Heart, Users, Target, Eye, BookOpen, Mountain, Bug, Wheat, Phone, Mail, MapPin, Facebook, ChevronDown, Youtube } from 'lucide-react';
 
 const Home = () => {
   const [openMenu, setOpenMenu] = useState(null);
@@ -66,7 +66,7 @@ const Home = () => {
     },
     {
       title: 'Impulso Verde',
-      description: 'Iniciativa que promueve el desarrollo sostenible y la economía verde en nuestras comunidades, fortaleciendo las prácticas agroecológicas tradicionales.'
+      description: 'Convenio ambiental que financió un proceso de siembra de aproximadamente 6.000 árboles al año. Las comunidades recibían los árboles y los beneficiarios asumían el compromiso de sembrarlos y cuidarlos.'
     },
     {
       title: 'A Ciencia Cierta',
@@ -79,14 +79,14 @@ const Home = () => {
   ];
 
   const galleryImages = [
-    { url: `${process.env.PUBLIC_URL}/images/paramo.JPG`, alt: 'Paisaje del páramo' },
-    { url: `${process.env.PUBLIC_URL}/images/indigena.jpg`, alt: 'Comunidad indígena' },
-    { url: `${process.env.PUBLIC_URL}/images/asociacion.jpg`, alt: 'Asociación' },
-    { url: `${process.env.PUBLIC_URL}/images/siembra.jpg`, alt: 'Siembra de árboles' },
-    { url: `${process.env.PUBLIC_URL}/images/apicultura.jpg`, alt: 'Apicultura' },
-    { url: `${process.env.PUBLIC_URL}/images/restauracion1.jpg`, alt: 'Restauración ambiental' },
-    { url: `${process.env.PUBLIC_URL}/images/restauracion.jpg`, alt: 'Restauración ambiental' },
-    { url: `${process.env.PUBLIC_URL}/images/restauracion2.jpg`, alt: 'Restauración ambiental' }
+    { src: `${process.env.PUBLIC_URL}/images/paramo.JPG`, alt: 'Paisaje del páramo' },
+    { src: `${process.env.PUBLIC_URL}/images/indigena.jpg`, alt: 'Comunidad indígena' },
+    { src: `${process.env.PUBLIC_URL}/images/asociacion.jpg`, alt: 'Asociación' },
+    { src: `${process.env.PUBLIC_URL}/images/siembra.jpg`, alt: 'Siembra de árboles' },
+    { src: `${process.env.PUBLIC_URL}/images/apicultura.jpg`, alt: 'Apicultura' },
+    { src: `${process.env.PUBLIC_URL}/images/restauracion1.jpg`, alt: 'Restauración ambiental' },
+    { src: `${process.env.PUBLIC_URL}/images/restauracion.jpg`, alt: 'Restauración ambiental' },
+    { src: `${process.env.PUBLIC_URL}/images/restauracion2.jpg`, alt: 'Restauración ambiental' }
   ];
 
 
@@ -171,40 +171,40 @@ const Home = () => {
               <CardContent className="p-8 md:p-12">
                 <div className="space-y-6 text-body-medium text-text-secondary leading-relaxed">
                   <p>
-                    La Asociación Pumamaki nació en el año 2016 como una iniciativa comunitaria inspirada en el cuidado del páramo, la protección del agua y el fortalecimiento cultural del pueblo Pasto. Su creación surgió de la necesidad de responder a los desafíos ambientales del territorio y de unir esfuerzos para conservar los ecosistemas que sostienen la vida en Guachucal y Muellamués.
+                    La Asociación Pumamaki tiene su origen en un grupo de shagreros del Resguardo de Muellamues que se reunió para fortalecer los conocimientos tradicionales, conservar las semillas propias, practicar la agricultura propia y cuidar el territorio.
                   </p>
                   <p>
-                    Desde su fundación, Pumamaki se ha caracterizado por ser una organización con un fuerte liderazgo femenino. Actualmente está conformada por 24 socios, de los cuales 18 son mujeres que aportan su conocimiento, experiencia y compromiso en procesos de conservación, producción sostenible, gobernanza comunitaria y transmisión de saberes ancestrales.
+                    El proceso inicial se desarrolló con el Programa Jóvenes Emprendedores Rurales del SENA. Allí aprendieron a elaborar abonos orgánicos, recuperar semillas nativas, conservar especies y aplicar prácticas sostenibles para el manejo de la tierra. Su participación posterior en procesos ambientales contribuyó a consolidar la organización.
                   </p>
-                  <p className="font-semibold text-text-primary">A lo largo de su trayectoria, Pumamaki ha impulsado acciones fundamentales para el bienestar del territorio, como:</p>
+                  <p>
+                    La mayoría de sus asociados son mujeres indígenas, guardianas del territorio y cuidadoras del medio ambiente. Pumamaki vincula a familias del Resguardo de Muellamues, fortalece la economía familiar mediante actividades ambientales y productivas, y promueve la transmisión de conocimientos ancestrales.
+                  </p>
+                  <p>
+                    Don Humberto Revelo, primer presidente de la asociación, aportó su liderazgo y prestó un lote de su vivienda para crear el primer vivero comunitario. En ese espacio comenzaron a trabajar colectivamente en:
+                  </p>
                   <ul className="space-y-3 ml-6">
                     <li className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Protección y restauración del ecosistema de páramo.</span>
+                      <span>Reconocimiento de plantas propias del territorio.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Monitoreo comunitario de la biodiversidad.</span>
+                      <span>Manejo y conservación de especies.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Fortalecimiento de prácticas productivas sostenibles como la chagra, la apicultura y viveros comunitarios.</span>
+                      <span>Elaboración de abonos orgánicos.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Gestión de conflictos socioambientales y planificación territorial.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Formación de mujeres, jóvenes y familias en temas ambientales, culturales y organizativos.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-brand-primary mt-2 flex-shrink-0"></div>
-                      <span>Integración de saberes ancestrales con herramientas técnicas modernas para la gestión ambiental.</span>
+                      <span>Recuperación y propagación de especies.</span>
                     </li>
                   </ul>
+                  <p>
+                    Después de aproximadamente seis años de trabajo, la asociación buscó un espacio propio para fortalecer sus procesos. En su trayectoria participó en un convenio ambiental con Impulso Verde para la siembra de aproximadamente 6.000 árboles anuales. Impulso Verde financiaba el proceso; las comunidades recibían los árboles y los beneficiarios se comprometían a sembrarlos y cuidarlos.
+                  </p>
                   <p className="text-lg font-semibold text-text-primary mt-8">
-                    Hoy, la Asociación Pumamaki es un referente regional en conservación y trabajo comunitario. Su labor continúa guiada por el respeto a la Madre Tierra, el compromiso con las futuras generaciones y la convicción de que el territorio se cuida colectivamente.
+                    La historia de Pumamaki reúne el trabajo comunitario, el cuidado del territorio y los conocimientos ancestrales que las familias comparten con las nuevas generaciones.
                   </p>
                 </div>
               </CardContent>
@@ -355,7 +355,7 @@ const Home = () => {
 
       {/* Galería */}
       <section id="galeria">
-        <Gallery />
+        <Gallery images={galleryImages} />
       </section>
 
       {/* Contacto y YouTube */}

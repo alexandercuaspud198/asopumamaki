@@ -1,16 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-const images = [
-    { id: 1, src: 'https://picsum.photos/800/600?random=1', alt: 'Galería Imagen 1' },
-    { id: 2, src: 'https://picsum.photos/800/600?random=2', alt: 'Galería Imagen 2' },
-    { id: 3, src: 'https://picsum.photos/800/600?random=3', alt: 'Galería Imagen 3' },
-    { id: 4, src: 'https://picsum.photos/800/600?random=4', alt: 'Galería Imagen 4' },
-    { id: 5, src: 'https://picsum.photos/800/600?random=5', alt: 'Galería Imagen 5' },
-    { id: 6, src: 'https://picsum.photos/800/600?random=6', alt: 'Galería Imagen 6' },
-];
-
-const Gallery = () => {
+const Gallery = ({ images }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -25,11 +16,11 @@ const Gallery = () => {
 
     const handleNext = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, []);
+    }, [images.length]);
 
     const handlePrev = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    }, []);
+    }, [images.length]);
 
     // Keyboard support
     useEffect(() => {
@@ -60,7 +51,7 @@ const Gallery = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {images.map((image, index) => (
                         <div
-                            key={image.id}
+                            key={image.src}
                             onClick={() => handleOpen(index)}
                             className="relative aspect-video overflow-hidden rounded-lg shadow-md cursor-pointer group"
                         >
@@ -122,7 +113,7 @@ const Gallery = () => {
                 )}
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes fadeIn {
                     from { opacity: 0; }
                     to { opacity: 1; }
