@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import ResponsiveImage from './ResponsiveImage';
 
 const Gallery = ({ images }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -55,9 +56,12 @@ const Gallery = ({ images }) => {
                             onClick={() => handleOpen(index)}
                             className="relative aspect-video overflow-hidden rounded-lg shadow-md cursor-pointer group"
                         >
-                            <img
+                            <ResponsiveImage
                                 src={image.src}
                                 alt={image.alt}
+                                sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
@@ -100,9 +104,10 @@ const Gallery = ({ images }) => {
 
                         {/* Main Image */}
                         <div className="relative w-full h-full p-4 flex items-center justify-center pointer-events-none">
-                            <img
+                            <ResponsiveImage
                                 src={images[currentIndex].src}
                                 alt={images[currentIndex].alt}
+                                decoding="async"
                                 className="max-w-full max-h-screen object-contain shadow-2xl pointer-events-auto"
                             />
                             <div className="absolute bottom-4 left-0 right-0 text-center text-white/70 text-sm pointer-events-auto">

@@ -16,7 +16,10 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold text-text-primary">Teléfono</p>
-                    <p className="text-text-secondary">3215654899</p>
+                    <p className="text-text-secondary">+57 321 565 4899</p>
+                    <a className="contact-action" href="tel:+573215654899">
+                      <Phone size={18} aria-hidden="true" /> Llamar
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -26,6 +29,9 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold text-text-primary">Correo Electrónico</p>
                     <p className="text-text-secondary">Asopumamaki22@gmail.com</p>
+                    <a className="contact-action" href="mailto:Asopumamaki22@gmail.com">
+                      <Mail size={18} aria-hidden="true" /> Enviar correo
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

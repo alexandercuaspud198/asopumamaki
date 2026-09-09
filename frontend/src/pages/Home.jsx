@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import ResponsiveImage from '../components/ResponsiveImage';
 export default function Home() {
 
   return (
 <section id="inicio" className="hero-section">
-        <img
+        <ResponsiveImage
           className="hero-photo"
           src={`${process.env.PUBLIC_URL}/images/paramo.JPG`}
           alt="Frailejones entre la niebla y un paisaje de montañas y campos."

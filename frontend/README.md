@@ -47,6 +47,25 @@ La validación local del **7 de septiembre de 2026** completó `npm install`, `n
 
 Las imágenes de [public/images](public/images/) usan `${process.env.PUBLIC_URL}/images/...` en JSX. Respetar las mayúsculas exactas de los nombres, como `paramo.JPG`, y evitar referencias absolutas como `/images/foto.jpg`, que omiten `/asopumamaki/`. Los imports de código y estilos se resuelven durante el build; no deben incluir la subruta del sitio.
 
+### Fotografías optimizadas y logo
+
+Se conservan los JPG originales en `public/images/`. Portada, galería e Historia usan `ResponsiveImage`, que consulta `src/data/imageVariants.json` y ofrece versiones WebP de hasta 640 y 1920 píxeles de ancho mediante `srcSet` y `sizes`. La imagen de portada se carga con prioridad alta; las miniaturas de la galería y los hitos de Historia se cargan al acercarse a la zona visible. La ampliación de galería puede seleccionar la versión de mayor resolución.
+
+Para regenerar los archivos después de añadir o sustituir fotos, instalar Pillow en Python y ejecutar desde `frontend`:
+
+```powershell
+python -m pip install Pillow
+python scripts/optimize-images.py
+```
+
+El script conserva los originales, genera `public/images/optimized/` y actualiza el manifiesto. Versionar ambos resultados junto con las fotos nuevas. Python solo se necesita para regenerar imágenes; el build y GitHub Actions utilizan los archivos ya preparados. `verify:build` comprueba las variantes, sus dimensiones declaradas y las rutas de los dos logos.
+
+El logo original se guardó como `public/images/logo-pumamaki.png` desde la URL pública que utilizaba el sitio. El menú y el pie de página sirven `images/optimized/logo-pumamaki.webp`, convertido sin pérdida y con transparencia.
+
+### Contacto directo
+
+`src/pages/Contact.jsx` contiene los enlaces `tel:+573215654899` y `mailto:Asopumamaki22@gmail.com`, basados en los datos existentes. Abren la aplicación de llamadas o correo configurada en el dispositivo; no envían mensajes automáticamente. Al cambiar los datos institucionales, actualizar tanto el texto visible como el enlace. WhatsApp queda pendiente de confirmar el número utilizado por la asociación.
+
 El script `postbuild` genera un `index.html` por cada ruta de `src/siteRoutes.json`. Así GitHub Pages puede servir enlaces directos y recargas con HTTP 200. También genera `404.html` para mostrar una página de error con enlace al Inicio cuando la ruta no existe. Al añadir una página, registrar su componente en App.js y su ruta en siteRoutes.json; `verify:build` comprueba sus entradas HTML.
 
 ## CI/CD
@@ -62,7 +81,6 @@ Los plugins de [plugins](plugins/) para edición visual y comprobación de salud
 - La actualización compatible mediante `npm audit fix`, sin `--force`, redujo los hallazgos de 63 a **33** el 7 de septiembre de 2026: 11 bajos, 8 moderados y 14 altos, sin críticos. Ejecutar `npm audit` para consultar el estado vigente y planificar la modernización de CRA y dependencias; la compilación correcta no elimina estos hallazgos.
 - Validar el calendario y su compatibilidad antes de incorporarlo; no confundir `legacy-peer-deps` con una solución funcional del conflicto.
 - Confirmar el contenido del catálogo y sustituir «Fotografía pendiente» por fotografías aprobadas. Los precios y productos actuales son referencias.
-- El logo de Emergent y la imagen principal de Unsplash siguen siendo externos; la galería utiliza las ocho fotografías locales.
 - Incorporar pruebas de comportamiento al añadir funcionalidades. El verificador de build comprueba archivos y rutas, pero no sustituye pruebas de interacción ni una comprobación del sitio publicado.
 
 ## Editar la línea del tiempo

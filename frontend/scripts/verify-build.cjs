@@ -33,10 +33,30 @@ for (const event of timeline.events) {
   assert.ok(event.image && event.imageAlt, `Falta la foto o su descripción: ${event.id}`);
   verifyAsset(`${base}${event.image}`);
 }
+const variants = require('../src/data/imageVariants.json');
+for (const image of [...images.map(([, source]) => source), ...timeline.events.map(event => event.image)]) {
+  assert.ok(variants[image]?.length, `Faltan versiones optimizadas de ${image}`);
+}
+for (const [original, versions] of Object.entries(variants)) {
+  verifyAsset(`${base}${original}`);
+  let previousWidth = 0;
+  for (const version of versions) {
+    verifyAsset(`${base}${version.src}`);
+    assert.ok(version.width > previousWidth && version.height > 0, `Dimensiones incorrectas: ${version.src}`);
+    const bytes = fs.readFileSync(path.join(build, version.src));
+    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF', `WebP incorrecto: ${version.src}`);
+    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP', `WebP incorrecto: ${version.src}`);
+    previousWidth = version.width;
+  }
+}
+const layout = fs.readFileSync(path.resolve(__dirname, '../src/components/SiteLayout.jsx'), 'utf8');
+const logos = [...layout.matchAll(/\$\{process\.env\.PUBLIC_URL\}\/([^`]+)`/g)];
+assert.equal(logos.length, 2, 'Comprobar los logos locales del menú y el pie de página');
+for (const [, logo] of logos) verifyAsset(`${base}${logo}`);
 assert.ok(html.includes('lang="es"'), "Falta el idioma español del documento");
 for (const route of require('../src/siteRoutes.json')) {
   const entry = path.join(build, route.path, 'index.html');
   assert.equal(fs.readFileSync(entry, 'utf8'), html, `Entrada incorrecta para ${route.path}`);
 }
 assert.equal(fs.readFileSync(path.join(build, '404.html'), 'utf8'), html);
-console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${images.length} referencias a fotos de galería y portada, y ${timeline.events.length} fotos en la línea del tiempo.`);
+console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${Object.keys(variants).length} fotografías optimizadas, ${timeline.events.length} fotos en la línea del tiempo y 2 logos locales.`);

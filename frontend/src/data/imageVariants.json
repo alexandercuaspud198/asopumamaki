@@ -1,0 +1,98 @@
+{
+  "images/apicultura.jpg": [
+    {
+      "src": "images/optimized/apicultura-640.webp",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "src": "images/optimized/apicultura-1280.webp",
+      "width": 1280,
+      "height": 721
+    }
+  ],
+  "images/asociacion.jpg": [
+    {
+      "src": "images/optimized/asociacion-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "images/optimized/asociacion-1280.webp",
+      "width": 1280,
+      "height": 960
+    }
+  ],
+  "images/indigena.jpg": [
+    {
+      "src": "images/optimized/indigena-640.webp",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "src": "images/optimized/indigena-1920.webp",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "images/paramo.JPG": [
+    {
+      "src": "images/optimized/paramo-640.webp",
+      "width": 640,
+      "height": 358
+    },
+    {
+      "src": "images/optimized/paramo-1920.webp",
+      "width": 1920,
+      "height": 1075
+    }
+  ],
+  "images/restauracion.jpg": [
+    {
+      "src": "images/optimized/restauracion-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "images/optimized/restauracion-1280.webp",
+      "width": 1280,
+      "height": 960
+    }
+  ],
+  "images/restauracion1.jpg": [
+    {
+      "src": "images/optimized/restauracion1-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "images/optimized/restauracion1-1280.webp",
+      "width": 1280,
+      "height": 960
+    }
+  ],
+  "images/restauracion2.jpg": [
+    {
+      "src": "images/optimized/restauracion2-640.webp",
+      "width": 640,
+      "height": 853
+    },
+    {
+      "src": "images/optimized/restauracion2-960.webp",
+      "width": 960,
+      "height": 1280
+    }
+  ],
+  "images/siembra.jpg": [
+    {
+      "src": "images/optimized/siembra-640.webp",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "src": "images/optimized/siembra-1280.webp",
+      "width": 1280,
+      "height": 960
+    }
+  ]
+}

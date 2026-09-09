@@ -1,5 +1,6 @@
 import timeline from '../data/historyTimeline.json';
 import './HistoryTimeline.css';
+import ResponsiveImage from './ResponsiveImage';
 
 export default function HistoryTimeline() {
   return (
@@ -24,13 +25,14 @@ export default function HistoryTimeline() {
                 {timeline.provisional && <small>Fecha de ejemplo</small>}
               </div>
               <figure className="history-timeline-photo">
-                <img
+                <ResponsiveImage
                   src={`${process.env.PUBLIC_URL}/${event.image}`}
                   alt={event.imageAlt}
                   width="1600"
                   height="1000"
                   loading="lazy"
                   decoding="async"
+                  sizes="(max-width: 760px) calc(100vw - 88px), (max-width: 1200px) calc(50vw - 64px), 524px"
                 />
                 {timeline.provisional && <figcaption>Fotografía de referencia del archivo de Pumamaki</figcaption>}
               </figure>

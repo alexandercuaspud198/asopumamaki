@@ -69,8 +69,10 @@ export default function SiteLayout() {
         <div className="nav-wrapper">
           <Link to="/" className="site-logo" aria-label="Pumamaki, ir al inicio" onClick={closeMenus}>
             <img
-              src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png"
+              src={`${process.env.PUBLIC_URL}/images/optimized/logo-pumamaki.webp`}
               alt="Logo Pumamaki"
+              width="416"
+              height="233"
               className="site-logo-image"
             />
           </Link>
@@ -140,8 +142,12 @@ export default function SiteLayout() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png"
+                  src={`${process.env.PUBLIC_URL}/images/optimized/logo-pumamaki.webp`}
                   alt="Logo Pumamaki"
+                  width="416"
+                  height="233"
+                  loading="lazy"
+                  decoding="async"
                   className="h-10 w-auto"
                 />
                 <span className="text-xl font-semibold text-text-primary">Pumamaki</span>

@@ -436,6 +436,31 @@ body {
   box-shadow: 0 0 0 3px rgba(144, 224, 0, 0.1);
 }
 
+/* Direct contact actions */
+.contact-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: var(--brand-dark);
+  color: white;
+  border: 2px solid var(--brand-dark);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.contact-action:hover { background: var(--text-secondary); }
+.contact-action:active { background: var(--brand-dark); }
+.contact-action:focus-visible { outline: 3px solid var(--brand-dark); outline-offset: 3px; }
+#contacto .grid > *, #contacto .flex.items-start > div:last-child { min-width: 0; }
+#contacto .icon-circle { flex-shrink: 0; }
+#contacto .text-text-secondary { overflow-wrap: anywhere; }
+
 /* Social Buttons */
 .social-button {
   width: 48px;
