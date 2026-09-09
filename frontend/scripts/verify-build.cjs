@@ -23,9 +23,9 @@ assert.ok(styles.length > 0, "index.html no contiene los estilos compilados");
 for (const [, url] of [...scripts, ...styles]) verifyAsset(url);
 for (const url of Object.values(manifest.files)) verifyAsset(url);
 
-// Check every public image referenced by the home page, including filename case.
-const home = fs.readFileSync(path.resolve(__dirname, "../src/pages/GalleryPage.jsx"), "utf8");
-const images = [...home.matchAll(/\$\{process\.env\.PUBLIC_URL\}\/([^`]+)`/g)];
+// Check public images referenced by the gallery and home, including filename case.
+const pages = ['GalleryPage.jsx', 'Home.jsx'].map(page => fs.readFileSync(path.resolve(__dirname, '../src/pages', page), 'utf8')).join('\n');
+const images = [...pages.matchAll(/\$\{process\.env\.PUBLIC_URL\}\/([^`]+)`/g)];
 assert.ok(images.length > 0, "No se encontraron las imágenes locales de la página");
 for (const [, image] of images) verifyAsset(`${base}${image}`);
 const timeline = require('../src/data/historyTimeline.json');
@@ -39,4 +39,4 @@ for (const route of require('../src/siteRoutes.json')) {
   assert.equal(fs.readFileSync(entry, 'utf8'), html, `Entrada incorrecta para ${route.path}`);
 }
 assert.equal(fs.readFileSync(path.join(build, '404.html'), 'utf8'), html);
-console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${images.length} fotos de galería y ${timeline.events.length} fotos en la línea del tiempo.`);
+console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${images.length} referencias a fotos de galería y portada, y ${timeline.events.length} fotos en la línea del tiempo.`);

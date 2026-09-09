@@ -1,15 +1,53 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import routes from '../siteRoutes.json';
 
 export default function SiteLayout() {
  const [openMenu, setOpenMenu] = useState(null);
+ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
  const { pathname } = useLocation();
  const mainRef = useRef(null);
- const toggleMenu = name => setOpenMenu(openMenu === name ? null : name);
+ const headerRef = useRef(null);
+ const mobileToggleRef = useRef(null);
+ const submenuRefs = useRef({});
+ const closeMenus = () => {
+   setOpenMenu(null);
+   setMobileMenuOpen(false);
+ };
+ const toggleMenu = name => setOpenMenu(current => current === name ? null : name);
+ const handleEscape = event => {
+   if (event.key !== 'Escape') return;
+   if (openMenu) {
+     submenuRefs.current[openMenu]?.focus();
+     setOpenMenu(null);
+   } else if (mobileMenuOpen) {
+     mobileToggleRef.current?.focus();
+     setMobileMenuOpen(false);
+   }
+ };
+ useEffect(() => {
+   const handleOutsideClick = event => {
+     if (!headerRef.current?.contains(event.target)) {
+       setOpenMenu(null);
+       setMobileMenuOpen(false);
+     }
+   };
+   const desktop = window.matchMedia('(min-width: 1024px)');
+   const handleResize = () => {
+     setOpenMenu(null);
+     setMobileMenuOpen(false);
+   };
+   document.addEventListener('pointerdown', handleOutsideClick);
+   desktop.addEventListener('change', handleResize);
+   return () => {
+     document.removeEventListener('pointerdown', handleOutsideClick);
+     desktop.removeEventListener('change', handleResize);
+   };
+ }, []);
  useEffect(() => {
    setOpenMenu(null);
+   setMobileMenuOpen(false);
    window.scrollTo({top: 0, behavior: 'instant'});
    const current = routes.find(route => route.path.replace(/\/$/, '') === pathname.replace(/\/$/, ''));
    document.title = (current?.title || 'Página no encontrada') + ' | Asociación Pumamaki';
@@ -20,55 +58,78 @@ export default function SiteLayout() {
    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
    return () => observer.disconnect();
  }, [pathname]);
- return <div className="min-h-screen bg-page" onKeyDown={event => {if(event.key === 'Escape') setOpenMenu(null);}}>
- <header className="network-header">
+ return <div className="min-h-screen bg-page">
+ <header
+   ref={headerRef}
+   className="network-header"
+   onKeyDown={handleEscape}
+   onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) closeMenus(); }}
+ >
 
         <div className="nav-wrapper">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="site-logo" aria-label="Pumamaki, ir al inicio" onClick={closeMenus}>
             <img
               src="https://customer-assets.emergentagent.com/job_1f02e8ad-74c3-41b3-a964-009dd04e8d7a/artifacts/qqgwka27_Imagen1-removebg-preview.png"
               alt="Logo Pumamaki"
-              className="h-12 w-auto"
+              className="site-logo-image"
             />
-          </div>
-          <nav className="network-nav">
-            <NavLink end to="/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Inicio</NavLink>
+          </Link>
+          <button
+            ref={mobileToggleRef}
+            type="button"
+            className="mobile-menu-toggle"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="site-navigation"
+            onClick={() => { setMobileMenuOpen(current => !current); setOpenMenu(null); }}
+          >
+            {mobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+            {mobileMenuOpen ? 'Cerrar' : 'Menú'}
+          </button>
+          <nav id="site-navigation" aria-label="Navegación principal" className={`network-nav${mobileMenuOpen ? ' is-open' : ''}`}>
+            <NavLink end to="/" className="network-nav-link" onClick={closeMenus}>Inicio</NavLink>
 
             <div className="nav-dropdown">
               <button
+                ref={element => { submenuRefs.current.nosotros = element; }}
+                type="button"
+                aria-controls="submenu-nosotros"
                 aria-expanded={openMenu === "nosotros"} onClick={() => toggleMenu('nosotros')}
-                className="network-nav-link flex items-center gap-1"
+                className={`network-nav-link flex items-center gap-1${['/historia/', '/nosotros/'].includes(pathname) ? ' is-current-section' : ''}`}
               >
                 Nosotros <ChevronDown className="w-4 h-4" />
               </button>
               {openMenu === 'nosotros' && (
-                <div className="dropdown-menu">
-                  <NavLink end to="/historia/" className="dropdown-item" onClick={() => setOpenMenu(null)}>Historia</NavLink>
-                  <NavLink end to="/nosotros/" className="dropdown-item" onClick={() => setOpenMenu(null)}>Misión y Visión</NavLink>
+                <div id="submenu-nosotros" className="dropdown-menu">
+                  <NavLink end to="/historia/" className="dropdown-item" onClick={closeMenus}>Historia</NavLink>
+                  <NavLink end to="/nosotros/" className="dropdown-item" onClick={closeMenus}>Misión y Visión</NavLink>
                 </div>
               )}
             </div>
 
             <div className="nav-dropdown">
               <button
+                ref={element => { submenuRefs.current.trabajo = element; }}
+                type="button"
+                aria-controls="submenu-trabajo"
                 aria-expanded={openMenu === "trabajo"} onClick={() => toggleMenu('trabajo')}
-                className="network-nav-link flex items-center gap-1"
+                className={`network-nav-link flex items-center gap-1${['/trabajo/', '/agroecologia/', '/apicultura/', '/restauracion/'].includes(pathname) ? ' is-current-section' : ''}`}
               >
                 Nuestro Trabajo <ChevronDown className="w-4 h-4" />
               </button>
               {openMenu === 'trabajo' && (
-                <div className="dropdown-menu">
-                  <NavLink end to="/agroecologia/" className="dropdown-item" onClick={() => setOpenMenu(null)}>Agroecología</NavLink>
-                  <NavLink end to="/apicultura/" className="dropdown-item" onClick={() => setOpenMenu(null)}>Apicultura</NavLink>
-                  <NavLink end to="/restauracion/" className="dropdown-item" onClick={() => setOpenMenu(null)}>Restauración</NavLink>
+                <div id="submenu-trabajo" className="dropdown-menu">
+                  <NavLink end to="/trabajo/" className="dropdown-item" onClick={closeMenus}>Ver todo nuestro trabajo</NavLink>
+                  <NavLink end to="/agroecologia/" className="dropdown-item" onClick={closeMenus}>Agroecología</NavLink>
+                  <NavLink end to="/apicultura/" className="dropdown-item" onClick={closeMenus}>Apicultura</NavLink>
+                  <NavLink end to="/restauracion/" className="dropdown-item" onClick={closeMenus}>Restauración</NavLink>
                 </div>
               )}
             </div>
 
-            <NavLink end to="/proyectos/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Proyectos</NavLink>
-            <NavLink end to="/productos/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Productos</NavLink>
-            <NavLink end to="/galeria/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Galería</NavLink>
-            <NavLink end to="/contacto/" className="network-nav-link" onClick={() => setOpenMenu(null)}>Contacto</NavLink>
+            <NavLink end to="/proyectos/" className="network-nav-link" onClick={closeMenus}>Proyectos</NavLink>
+            <NavLink end to="/productos/" className="network-nav-link" onClick={closeMenus}>Productos</NavLink>
+            <NavLink end to="/galeria/" className="network-nav-link" onClick={closeMenus}>Galería</NavLink>
+            <NavLink end to="/contacto/" className="network-nav-link" onClick={closeMenus}>Contacto</NavLink>
           </nav>
         </div>
       </header>
