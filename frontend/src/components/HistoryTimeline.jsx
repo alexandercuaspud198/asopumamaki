@@ -33,7 +33,7 @@ export default function HistoryTimeline() {
         <ol className="history-timeline-list" reversed aria-label="Historia de Pumamaki, desde los hitos más recientes hasta el origen">
           {events.map((event, index) => (
             <li key={event.id} className={`history-timeline-event ${index % 2 === 0 ? 'is-right' : 'is-left'}`}>
-              <HistoryBranch side={index % 2 === 0 ? 'right' : 'left'} />
+              <HistoryBranch side={index % 2 === 0 ? 'right' : 'left'} compact={index === 0} />
               <span className="history-event-node" aria-hidden="true" />
               <article className="history-timeline-card" aria-labelledby={`timeline-${event.id}`}>
                 <div className="history-timeline-story">
