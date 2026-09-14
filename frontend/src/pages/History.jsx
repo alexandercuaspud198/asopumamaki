@@ -6,7 +6,6 @@ export default function History() {
   return (
 <section id="historia" className="section-padding bg-subtle">
         <div className="container-custom">
-          <h1 className="section-title fade-in">Nuestra Historia</h1>
           <HistoryTimeline />
           <div className="max-w-4xl mx-auto">
             <details className="history-full-story">
