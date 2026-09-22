@@ -33,9 +33,9 @@ export default function HistoryTimeline() {
         <ol className="history-timeline-list" reversed aria-label="Historia de Pumamaki, desde los hitos más recientes hasta el origen">
           {events.map((event, index) => (
             <li key={event.id} className={`history-timeline-event ${index % 2 === 0 ? 'is-right' : 'is-left'}`}>
-              <HistoryBranch side={index % 2 === 0 ? 'right' : 'left'} compact={index === 0} />
               <span className="history-event-node" aria-hidden="true" />
               <article className="history-timeline-card" aria-labelledby={`timeline-${event.id}`}>
+                <HistoryBranch side={index % 2 === 0 ? 'right' : 'left'} eager={index === 0} />
                 <div className="history-timeline-story">
                   <span className="history-timeline-year">{event.year}</span>
                   <h3 id={`timeline-${event.id}`} tabIndex={-1}>{treeTitles[event.id] || event.title}</h3>
@@ -50,7 +50,7 @@ export default function HistoryTimeline() {
                     height="800"
                     loading={index === 0 ? 'eager' : 'lazy'}
                     decoding="async"
-                    sizes="(max-width: 480px) calc(100vw - 108px), (max-width: 900px) 40vw, (max-width: 1100px) 19vw, 250px"
+                    sizes="(max-width: 600px) calc(100vw - 140px), (max-width: 900px) 40vw, (max-width: 1100px) 19vw, 250px"
                   />
                 </figure>
               </article>

@@ -29,6 +29,19 @@ const images = [...pages.matchAll(/\$\{process\.env\.PUBLIC_URL\}\/([^`]+)`/g)];
 assert.ok(images.length > 0, "No se encontraron las imágenes locales de la página");
 for (const [, image] of images) verifyAsset(`${base}${image}`);
 const timeline = require('../src/data/historyTimeline.json');
+const treeAssets = require('../src/data/historyTreeAssets.json');
+for (const part of ['frame', 'trunk', 'crown', 'roots']) {
+  const asset = treeAssets[part];
+  assert.ok(asset?.width > 0 && asset?.height > 0, `Falta la ilustración del árbol: ${part}`);
+  verifyAsset(`${base}${asset.src}`);
+  const bytes = fs.readFileSync(path.join(build, asset.src));
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF', `WebP incorrecto: ${asset.src}`);
+  assert.equal(bytes.toString('ascii', 8, 12), 'WEBP', `WebP incorrecto: ${asset.src}`);
+  assert.equal(bytes.toString('ascii', 12, 16), 'VP8X', `Falta el encabezado de transparencia: ${asset.src}`);
+  assert.ok(bytes[20] & 0x10, `Falta la transparencia del árbol: ${asset.src}`);
+  assert.equal(bytes.readUIntLE(24, 3) + 1, asset.width, `Ancho incorrecto: ${asset.src}`);
+  assert.equal(bytes.readUIntLE(27, 3) + 1, asset.height, `Alto incorrecto: ${asset.src}`);
+}
 for (const event of timeline.events) {
   assert.ok(event.image && event.imageAlt, `Falta la foto o su descripción: ${event.id}`);
   verifyAsset(`${base}${event.image}`);
@@ -59,4 +72,4 @@ for (const route of require('../src/siteRoutes.json')) {
   assert.equal(fs.readFileSync(entry, 'utf8'), html, `Entrada incorrecta para ${route.path}`);
 }
 assert.equal(fs.readFileSync(path.join(build, '404.html'), 'utf8'), html);
-console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${Object.keys(variants).length} fotografías optimizadas, ${timeline.events.length} fotos en la línea del tiempo y 2 logos locales.`);
+console.log(`Build verificado: ${base}, ${Object.keys(manifest.files).length} recursos compilados, ${Object.keys(variants).length} fotografías optimizadas, ${timeline.events.length} fotos en la línea del tiempo, 4 ilustraciones del árbol con transparencia y 2 logos locales.`);
